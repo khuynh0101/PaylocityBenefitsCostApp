@@ -1,17 +1,13 @@
-.container{
+.container {
   margin: 16px;
 }
-.contentContainer{
-  margin: 16px;
-}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
   }
-  .input {
-    border: 1px #3b9288 solid;
-    display: block;
-    width: 350px;
+  .contentContainer {
+    margin: 16px 16px 16px 150px;
   }
 }
 
