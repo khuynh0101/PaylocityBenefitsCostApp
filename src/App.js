@@ -55,7 +55,7 @@ const App = () => {
         </svg>
       </div>
       <div className={styles.contentContainer}>
-        <h4>Employee Benefits Cost Calculator</h4>
+        <h3>Employee Benefits Cost Calculator</h3>
         <div>
           <Employee />
         </div>

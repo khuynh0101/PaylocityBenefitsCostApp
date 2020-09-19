@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './benefitsSummary.module.css';
 
-export const BenefitsSummary = ({ name, benefitSummary }) => {
+export const BenefitsSummary = ({ benefitSummary }) => {
   return (
     <>
-      <h4>Benefits Cost Summary for {name}</h4>
+      <h4>Benefits Cost Summary</h4>
       <div className={styles.summaryContainer}>
         <div>Total Salary</div>
         <div>${benefitSummary.TotalSalary}</div>

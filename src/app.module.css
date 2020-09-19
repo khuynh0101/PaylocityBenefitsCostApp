@@ -4,7 +4,7 @@
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
   .contentContainer {
     margin: 16px 16px 16px 150px;
@@ -13,11 +13,11 @@
 
 @media (min-width: 1024px) {
   html {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 @media (min-width: 2048px) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 }

@@ -3,3 +3,13 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 4px;
 }
+
+@media (min-width: 768px) {
+  .dependents {
+    display: flex;
+    flex-direction: row;
+  }
+  .summaryContainer {
+    grid-template-columns: 0.3fr 1fr;
+  }
+}

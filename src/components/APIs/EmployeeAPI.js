@@ -1,16 +1,24 @@
-export const getEmployeeBenefitsCost = async (employee, callbackFunc) => {
-  const response = await fetch(
-    //`${process.env.REACT_APP_API_EMPLOYEE_PREFIX_URL}CalculateBenefitsCost`,
+export const getEmployeeBenefitsCost = (employee, callbackFunc) => {
+  fetchData(
     'http://localhost:51572/api/Employee/CalculateBenefitsCost',
-    {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(employee),
-    }
+    employee,
+    callbackFunc
   );
+};
+
+export const saveEmployeeBenefitsCost = (employee, callbackFunc) => {
+  fetchData('http://localhost:51572/api/Employee/Save', employee, callbackFunc);
+};
+
+const fetchData = async (url, payload, callbackFunc) => {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
   const data = await response.json();
   callbackFunc(data);
 };

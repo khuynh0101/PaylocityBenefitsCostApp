@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import styles from './employee.module.css';
 import { BenefitsSummary } from '../BenefitsSummary/BenefitsSummary';
-import { getEmployeeBenefitsCost } from '../APIs/EmployeeAPI';
+import {
+  saveEmployeeBenefitsCost,
+  getEmployeeBenefitsCost,
+} from '../APIs/EmployeeAPI';
 
 export const Employee = () => {
-  const [employee, setEmployee] = useState({ name: '', Dependents: [] });
+  const [employee, setEmployee] = useState({ name: '', dependents: [] });
   const [employeeHasError, setEmployeeHasError] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleEmployeeNameTextBoxOnChange = (event) => {
     const employeeObj = { ...employee };
@@ -15,19 +19,19 @@ export const Employee = () => {
 
   const handleAddDependentButtonClick = () => {
     const employeeObj = { ...employee };
-    employeeObj.Dependents.push({ name: '' });
+    employeeObj.dependents.push({ name: '' });
     setEmployee(employeeObj);
   };
 
   const handleRemoveDependentButtonClick = (index) => {
     const employeeObj = { ...employee };
-    employeeObj.Dependents.splice(index, 1);
+    employeeObj.dependents.splice(index, 1);
     setEmployee(employeeObj);
   };
 
   const handleDependentTextBoxChange = (event, index) => {
     const employeeObj = { ...employee };
-    employeeObj.Dependents[index].name = event.target.value;
+    employeeObj.dependents[index].name = event.target.value;
     setEmployee(employeeObj);
   };
 
@@ -37,7 +41,7 @@ export const Employee = () => {
     } else {
       //remove any dependents where there is no name entered
       const employeeObj = { ...employee };
-      const dependentsObj = employeeObj.Dependents;
+      const dependentsObj = employeeObj.dependents;
       dependentsObj.forEach((result, index) => {
         if (result.name.trim() === '') {
           dependentsObj.splice(index, 1);
@@ -47,11 +51,23 @@ export const Employee = () => {
       getEmployeeBenefitsCost(employeeObj, handleBenefitsSummaryData);
     }
   };
-
   const handleBenefitsSummaryData = (data) => {
     const employeeObj = { ...employee };
     employeeObj.BenefitsSummary = data.summary;
     setEmployee(employeeObj);
+  };
+
+  const handleSaveButtonClick = () => {
+    const employeeObj = { ...employee };
+    saveEmployeeBenefitsCost(employeeObj, handleSavedData);
+  };
+  const handleSavedData = (data) => {
+    setEmployee({ name: '', dependents: [] });
+    setMessage(
+      data.isSaved
+        ? 'Employee benefits cost saved.'
+        : 'Employee benefits cost failed to save. Please try again.'
+    );
   };
 
   return (
@@ -69,11 +85,10 @@ export const Employee = () => {
           />
           <div>{employeeHasError && 'Employee Name is required'}</div>
         </div>
-
-        <span>Dependent Name</span>
+        <div>Dependent Name</div>
         <div>
-          {employee.Dependents &&
-            employee.Dependents.map((dependent, index) => {
+          {employee.dependents &&
+            employee.dependents.map((dependent, index) => {
               return (
                 <div className={styles.dependents}>
                   <div>
@@ -114,13 +129,18 @@ export const Employee = () => {
               Preview Benefits Cost
             </button>
           </div>
+          <div>{message}</div>
         </div>
       </div>
       {employee.BenefitsSummary && (
-        <BenefitsSummary
-          name={employee.name}
-          benefitSummary={employee.BenefitsSummary}
-        />
+        <>
+          <BenefitsSummary benefitSummary={employee.BenefitsSummary} />
+          <div className={styles.containerGrid}>
+            <div className={styles.offsetGrid2}>
+              <button onClick={handleSaveButtonClick}>Save</button>
+            </div>
+          </div>
+        </>
       )}
     </>
   );
