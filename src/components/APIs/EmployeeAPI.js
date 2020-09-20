@@ -1,13 +1,11 @@
+import { CALCULATECOSTURL, SAVEEMPLOYEECOSTURL } from '../../Constants';
+
 export const getEmployeeBenefitsCost = (employee, callbackFunc) => {
-  fetchData(
-    'http://localhost:51572/api/Employee/CalculateBenefitsCost',
-    employee,
-    callbackFunc
-  );
+  fetchData(CALCULATECOSTURL, employee, callbackFunc);
 };
 
 export const saveEmployeeBenefitsCost = (employee, callbackFunc) => {
-  fetchData('http://localhost:51572/api/Employee/Save', employee, callbackFunc);
+  fetchData(SAVEEMPLOYEECOSTURL, employee, callbackFunc);
 };
 
 const fetchData = async (url, payload, callbackFunc) => {

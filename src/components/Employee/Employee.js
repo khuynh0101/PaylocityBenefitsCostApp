@@ -126,7 +126,7 @@ export const Employee = () => {
               className={styles.button}
               onClick={handlePreviewButtonClick}
             >
-              Preview Benefits Cost
+              Calculate Benefits Cost
             </button>
           </div>
           <div>{message}</div>
