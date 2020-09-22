@@ -17,6 +17,12 @@ export const Employee = () => {
     setEmployee(employeeObj);
   };
 
+  const handleDependentTextBoxChange = (event, index) => {
+    const employeeObj = { ...employee };
+    employeeObj.dependents[index].name = event.target.value;
+    setEmployee(employeeObj);
+  };
+
   const handleAddDependentButtonClick = () => {
     const employeeObj = { ...employee };
     employeeObj.dependents.push({ name: '' });
@@ -26,12 +32,6 @@ export const Employee = () => {
   const handleRemoveDependentButtonClick = (index) => {
     const employeeObj = { ...employee };
     employeeObj.dependents.splice(index, 1);
-    setEmployee(employeeObj);
-  };
-
-  const handleDependentTextBoxChange = (event, index) => {
-    const employeeObj = { ...employee };
-    employeeObj.dependents[index].name = event.target.value;
     setEmployee(employeeObj);
   };
 
@@ -48,10 +48,10 @@ export const Employee = () => {
         }
       });
       setEmployee(employeeObj);
-      getEmployeeBenefitsCost(employeeObj, handleBenefitsSummaryData);
+      getEmployeeBenefitsCost(employeeObj, benefitsSummaryResultCallback);
     }
   };
-  const handleBenefitsSummaryData = (data) => {
+  const benefitsSummaryResultCallback = (data) => {
     const employeeObj = { ...employee };
     employeeObj.BenefitsSummary = data.summary;
     setEmployee(employeeObj);
@@ -59,9 +59,9 @@ export const Employee = () => {
 
   const handleSaveButtonClick = () => {
     const employeeObj = { ...employee };
-    saveEmployeeBenefitsCost(employeeObj, handleSavedData);
+    saveEmployeeBenefitsCost(employeeObj, savedResultCallback);
   };
-  const handleSavedData = (data) => {
+  const savedResultCallback = (data) => {
     setEmployee({ name: '', dependents: [] });
     setMessage(
       data.isSaved
@@ -90,7 +90,7 @@ export const Employee = () => {
           {employee.dependents &&
             employee.dependents.map((dependent, index) => {
               return (
-                <div className={styles.dependents}>
+                <div className={styles.dependents} key={index}>
                   <div>
                     <input
                       type='text'
