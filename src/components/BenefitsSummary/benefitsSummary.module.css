@@ -3,6 +3,9 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 4px;
 }
+.totalCost {
+  font-weight: bold;
+}
 
 @media (min-width: 768px) {
   .dependents {

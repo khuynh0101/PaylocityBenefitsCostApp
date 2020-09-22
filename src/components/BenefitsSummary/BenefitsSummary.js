@@ -7,13 +7,17 @@ export const BenefitsSummary = ({ benefitSummary }) => {
       <h4>Benefits Cost Summary</h4>
       <div className={styles.summaryContainer}>
         <div>Total Salary</div>
-        <div>${benefitSummary.TotalSalary}</div>
+        <div>${benefitSummary.TotalSalary.toFixed(2)}</div>
         <div>Employee Cost</div>
-        <div>${benefitSummary.EmployeeCost}</div>
+        <div>${benefitSummary.EmployeeCost.toFixed(2)}</div>
         <div>Dependents Cost</div>
-        <div>${benefitSummary.DependentsCost}</div>
+        <div>${benefitSummary.DependentsCost.toFixed(2)}</div>
+        <div>Cost Per Paycheck</div>
+        <div>${benefitSummary.CostPerPayCheck.toFixed(2)}</div>
         <div>Total Cost</div>
-        <div>${benefitSummary.TotalCost}</div>
+        <div className={styles.totalCost}>
+          ${benefitSummary.TotalCost.toFixed(2)}
+        </div>
       </div>
     </>
   );
